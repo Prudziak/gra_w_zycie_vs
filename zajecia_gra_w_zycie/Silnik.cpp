@@ -16,18 +16,21 @@ Engine::~Engine()
 }
 
 
-Engine::Engine(int w, int k)
+Engine::Engine(int w, int k) : nw(w), nk(k)
 {
-	nw = w;
-	nk = k;
-	stany = new bool* [nw];
-	stany_temp = new bool* [nw];
-	for (int i = 0; i < k; k++)
+	this->stany = new int* [nw];
+	this->stany_temp = new int* [nw];
+	for (int i = 0; i < nk; i++)
 	{
-		stany[i] = new bool[nk];
-		stany_temp[i] = new bool[nk];
+		stany[i] = new int[nk];
+		stany_temp[i] = new int[nk];
 	}
-
+	for (int i = 0; i < nw; i++)
+		for (int j = 0; j < nk; j++)
+		{
+			stany[i][j] = 0;
+			stany_temp[i][j] = 0;
+		}
 }
 
 Engine& Engine::operator=(const Engine& e)
@@ -44,32 +47,36 @@ void Engine::Init(const char* fName) {
 		{
 			int a, b;
 			dane >> a >> b;
-			stany[a][b] = true;
+			stany[a][b] = 1;
+			stany_temp[a][b] = 1;
 		}
 	}
 }
 
-int Engine::CheckNeighbours(int nw, int nk) {
+
+int Engine::CheckNeighbours(int i, int j) {
 	int ip, im, jp, jm;
-	if (nw < nw - 1) ip = nw + 1; else ip = 0;
-	if (nw > 0) im = nw - 1; else im = nw - 1;
-	if (nk < nk - 1) jp = nk + 1; else jp = 0;
-	if (nk > 0) jm = nk - 1; else jm = nk - 1;
-	return stany[ip][nk] + stany[im][nk] + stany[nw][jp] + stany[nw][jm] +
-		stany[ip][jp] + stany[im][jm] + stany[im][jp] + stany[ip][jm];  // zwrocenie ilosci zywych sasiadow danej komorki
+	if (i < nw - 1) ip = i + 1; else ip = 0;
+	if (i > 0) im = i - 1; else im = nw - 1;
+	if (j < nk - 1) jp = j + 1; else jp = 0;
+	if (j > 0) jm = j - 1; else jm = nk - 1;
+	
+	return stany[ip][j] + stany[im][j] + stany[i][jp] + stany[i][jm] +
+		stany[ip][jp] + stany[im][jm] + stany[im][jp] + stany[ip][jm];// zwrocenie ilosci zywych sasiadow danej komorki
 }
 
-void Engine::NewStatus(int nw, int nk) {
+void Engine::NewStatus() {
 	// Jezeli zywa komorka ma 2 lub 3 zywych sasiadow to dalej jest zywa
 	for (int x = 0 ; x < nw ; x++)
 		for (int y = 0; y < nk; y++)
 		{
-			int s = CheckNeighbours(nw, nk);
-			if ((stany[x][y] && (s == 2 || s == 3)) || (!stany[x][y] && (s == 3)))
-				stany_temp[x][y] = true;
-			else
-				stany_temp[x][y] = false;
-
 			stany[x][y] = stany_temp[x][y];
+			if (stany[x][y] == 1 && (CheckNeighbours(x, y) == 2 || CheckNeighbours(x, y) == 3))
+				stany_temp[x][y] = 1;
+			else
+				if (stany[x][y] == 0 && CheckNeighbours(x, y) == 3)
+					stany_temp[x][y] = 1;
+			else
+				stany_temp[x][y] = 0;
 		}
 }

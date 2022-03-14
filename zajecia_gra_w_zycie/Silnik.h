@@ -4,16 +4,17 @@
 class Engine
 {
 protected:
-	bool** stany;
-	bool** stany_temp;
+	int** stany;
+	int** stany_temp;
 	int nw, nk;
-protected:
+public:
 	Engine(int w, int k);
 	void Init(const char* fName);
 	virtual ~Engine();
+	//void wyswietl();
 private:
-	int CheckNeighbours(int nw, int nk);
-	void NewStatus(int nw, int nk);
+	int CheckNeighbours(int i, int j);
+	void NewStatus();
 	friend class GameOfLife;
 private:
 	Engine(const Engine& e);

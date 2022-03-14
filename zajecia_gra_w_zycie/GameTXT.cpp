@@ -5,13 +5,16 @@ using namespace std;
 
 void GameTxt::View() {
 	for (int i = 0; i < nw; i++)
+	{
 		for (int j = 0; j < nk; j++)
 		{
-			if (stany_temp[i][j] == true)
-				cout << " O ";
-			else
+			if (stany[i][j] == 0)
 				cout << " . ";
+			else
+				cout << " O ";
 		}
+		cout << endl;
+	}
 }
 
 GameTxt& GameTxt::operator=(const GameTxt& k) {

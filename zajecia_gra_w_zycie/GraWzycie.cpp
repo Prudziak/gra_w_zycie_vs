@@ -1,6 +1,10 @@
 #include "GraWzycie.h"
 #include <Windows.h>
 
+#include <iostream>
+
+using namespace std;
+
 
 GameOfLife& GameOfLife::operator=(const GameOfLife& s) {
 	return *this;
@@ -10,10 +14,11 @@ void GameOfLife::Play(const char* fName) {
 	Init(fName);
 	View();
 
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 100; i++)
 	{
-		CheckNeighbours(nw, nk);
-		NewStatus(nw, nk);
+		system("cls");
+		cout << endl << "Pokolenie: " << i << endl << endl;
+		NewStatus();
 		View();
 		Sleep(600);	
 	}

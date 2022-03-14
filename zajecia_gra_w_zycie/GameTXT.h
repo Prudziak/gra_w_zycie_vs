@@ -4,7 +4,8 @@
 class GameTxt : public GameOfLife
 {
 public:
-	GameTxt(int w, int k) : GameOfLife(w, k) {}
+	int xw, xk;
+	GameTxt(int w, int k) : GameOfLife(w, k), xw(w), xk(k) {}
 	virtual void View();
 private:
 	GameTxt(const GameTxt& k);
