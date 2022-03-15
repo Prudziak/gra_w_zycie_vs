@@ -70,13 +70,19 @@ void Engine::NewStatus() {
 	for (int x = 0 ; x < nw ; x++)
 		for (int y = 0; y < nk; y++)
 		{
-			stany[x][y] = stany_temp[x][y];
 			if (stany[x][y] == 1 && (CheckNeighbours(x, y) == 2 || CheckNeighbours(x, y) == 3))
 				stany_temp[x][y] = 1;
-			else
-				if (stany[x][y] == 0 && CheckNeighbours(x, y) == 3)
-					stany_temp[x][y] = 1;
+
+			else if (stany[x][y] == 0 && CheckNeighbours(x, y) == 3)
+				stany_temp[x][y] = 1;
+
 			else
 				stany_temp[x][y] = 0;
 		}
+	for (int x = 0 ; x < nw ; x++)
+		for (int y = 0; y < nk; y++)
+		{
+			stany[x][y] = stany_temp[x][y];
+		}
+
 }
