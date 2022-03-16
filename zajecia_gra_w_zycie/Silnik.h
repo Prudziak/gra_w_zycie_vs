@@ -7,7 +7,7 @@ protected:
 	bool** stany;
 	bool** stany_temp;
 	int nw, nk;
-public:
+protected:
 	Engine(int w, int k);
 	void Init(const char* fName);
 	virtual ~Engine();

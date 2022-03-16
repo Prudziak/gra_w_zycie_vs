@@ -1,5 +1,4 @@
 #include "GraWzycie.h"
-#include <windows.h>
 
 #include <iostream>
 
@@ -20,7 +19,6 @@ void GameOfLife::Play(const char* fName) {
 		cout << endl << "Pokolenie: " << i << endl << endl;
 		NewStatus();
 		View();
-		Sleep(600);	
 	}
 }
 

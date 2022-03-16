@@ -18,8 +18,8 @@ Engine::~Engine()
 
 Engine::Engine(int w, int k) : nw(w), nk(k)
 {
-	this->stany = new bool* [nw];
-	this->stany_temp = new bool* [nw];
+	stany = new bool* [nw];
+	stany_temp = new bool* [nw];
 	for (int i = 0; i < nk; i++)
 	{
 		stany[i] = new bool[nk];
@@ -51,6 +51,7 @@ void Engine::Init(const char* fName) {
 			stany_temp[a][b] = true;
 		}
 	}
+	dane.close();
 }
 
 

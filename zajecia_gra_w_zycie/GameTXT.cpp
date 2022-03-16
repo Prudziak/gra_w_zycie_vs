@@ -15,6 +15,7 @@ void GameTxt::View() {
 		}
 		cout << endl;
 	}
+	Sleep(600);
 }
 
 GameTxt& GameTxt::operator=(const GameTxt& k) {
