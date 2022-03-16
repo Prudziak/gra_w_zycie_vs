@@ -2,7 +2,7 @@
 #include <math.h>
 #include "GameTXT.h"
 #include <Fstream>
-#include <Windows.h>
+#include <windows.h>
 
 using namespace std;
 

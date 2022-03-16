@@ -4,8 +4,8 @@
 class Engine
 {
 protected:
-	int** stany;
-	int** stany_temp;
+	bool** stany;
+	bool** stany_temp;
 	int nw, nk;
 public:
 	Engine(int w, int k);

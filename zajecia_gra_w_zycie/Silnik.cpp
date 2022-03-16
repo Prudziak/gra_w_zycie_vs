@@ -18,18 +18,18 @@ Engine::~Engine()
 
 Engine::Engine(int w, int k) : nw(w), nk(k)
 {
-	this->stany = new int* [nw];
-	this->stany_temp = new int* [nw];
+	this->stany = new bool* [nw];
+	this->stany_temp = new bool* [nw];
 	for (int i = 0; i < nk; i++)
 	{
-		stany[i] = new int[nk];
-		stany_temp[i] = new int[nk];
+		stany[i] = new bool[nk];
+		stany_temp[i] = new bool[nk];
 	}
 	for (int i = 0; i < nw; i++)
 		for (int j = 0; j < nk; j++)
 		{
-			stany[i][j] = 0;
-			stany_temp[i][j] = 0;
+			stany[i][j] = false;
+			stany_temp[i][j] = false;
 		}
 }
 
@@ -47,8 +47,8 @@ void Engine::Init(const char* fName) {
 		{
 			int a, b;
 			dane >> a >> b;
-			stany[a][b] = 1;
-			stany_temp[a][b] = 1;
+			stany[a][b] = true;
+			stany_temp[a][b] = true;
 		}
 	}
 }
@@ -70,14 +70,14 @@ void Engine::NewStatus() {
 	for (int x = 0 ; x < nw ; x++)
 		for (int y = 0; y < nk; y++)
 		{
-			if (stany[x][y] == 1 && (CheckNeighbours(x, y) == 2 || CheckNeighbours(x, y) == 3))
-				stany_temp[x][y] = 1;
+			if (stany[x][y] == true && (CheckNeighbours(x, y) == 2 || CheckNeighbours(x, y) == 3))
+				stany_temp[x][y] = true;
 
-			else if (stany[x][y] == 0 && CheckNeighbours(x, y) == 3)
-				stany_temp[x][y] = 1;
+			else if (stany[x][y] == false && CheckNeighbours(x, y) == 3)
+				stany_temp[x][y] = true;
 
 			else
-				stany_temp[x][y] = 0;
+				stany_temp[x][y] = false;
 		}
 	for (int x = 0 ; x < nw ; x++)
 		for (int y = 0; y < nk; y++)

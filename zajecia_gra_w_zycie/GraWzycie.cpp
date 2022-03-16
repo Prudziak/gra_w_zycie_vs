@@ -1,5 +1,5 @@
 #include "GraWzycie.h"
-#include <Windows.h>
+#include <windows.h>
 
 #include <iostream>
 

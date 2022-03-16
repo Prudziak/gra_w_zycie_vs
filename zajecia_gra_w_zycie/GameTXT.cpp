@@ -1,6 +1,6 @@
 #include "GameTXT.h"
 #include <iostream>
-#include <Windows.h>
+#include <windows.h>
 using namespace std;
 
 void GameTxt::View() {
@@ -8,7 +8,7 @@ void GameTxt::View() {
 	{
 		for (int j = 0; j < nk; j++)
 		{
-			if (stany[i][j] == 0)
+			if (stany[i][j] == false)
 				cout << " . ";
 			else
 				cout << " O ";
